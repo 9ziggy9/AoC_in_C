@@ -35,7 +35,7 @@ int main(void) {
         long zero_count = 0;
         for (i = 1; strcmp(binary_dump[i], "done"); i++) {
             int ival = from_binary(binary_dump[i]);
-            if (kth_bit(ival, k) == 1) one_count++;
+            if (kth_bit(ival, k)) one_count++;
             else zero_count++;
         }
         if (one_count > zero_count) gamma ^= (1 << k);
