@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 typedef struct Position {
     int x;
@@ -17,7 +18,7 @@ int main(void) {
 
     int i = 0;
 
-    Instruction instruction_set[5000];
+    Instruction instruction_set[2000];
 
     FILE* inst;
     inst = fopen("input.txt", "r");
@@ -35,8 +36,15 @@ int main(void) {
     instruction_set[i].magnitude = '\0';
 
     for (i = 0; instruction_set[i].magnitude != '\0'; i++) {
-        printf("%s %d\n", instruction_set[i].action, instruction_set[i].magnitude);
+        char* a = instruction_set[i].action;
+        if (!strcmp(a, "down")) position.depth += instruction_set[i].magnitude;
+        if (!strcmp(a, "up")) position.depth -= instruction_set[i].magnitude;
+        if (!strcmp(a, "forward")) position.x += instruction_set[i].magnitude;
     }
+
+    printf("current position: (%d, %d, %d)\n", position.x,
+                                            position.depth,
+                                            position.depth * position.x);
 
     return 0;
 }
